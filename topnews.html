@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Top Stories</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+    </style>   
+    <script>
+        function fetchTopStories() {
+            fetch('/topstorieshtml')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('top-stories').innerHTML = data;
+                });
+        };
+        function fetchBestStories() {
+            fetch('/beststorieshtml')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('best-stories').innerHTML = data;
+                });
+        }
+        function showSummary(url,id) {
+            event.preventDefault();
+            fetch('/summary?url=' + url)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById(id).innerHTML = data;
+                });
+        }
+    </script>
+</head>
+<body>
+    <h1>Top Stories</h1>
+    <div id="top-stories"></div>
+    <div onclick="fetchTopStories()" style="
+        display: inline-block;
+        padding: 10px 20px;
+        color: #fff;
+        background-color: #007BFF;
+        border: none;
+        border-radius: 4px;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+    ">click to load top stories</div>   
+    <h1> Best Stories</h1>  
+    <div id="best-stories"></div> 
+    <div onclick="fetchBestStories()" style="
+        display: inline-block;
+        padding: 10px 20px;
+        color: #fff;
+        background-color: #007BFF;
+        border: none;
+        border-radius: 4px;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+    ">click to load best stories</div>
+</body>
+</html>
